@@ -37,16 +37,6 @@ async function displayData(photographers) {
     });
 };
 
-fetch('./data/photographers.json')
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (data) {
-        appendData(data);
-    })
-    .catch(function (err) {
-        console.log(err);
-    });
 
 
 async function init() {
