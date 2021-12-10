@@ -28,7 +28,7 @@ h1 {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 70px;
-    margin-top: 100px;
+    margin-top: 70px;
 }
 
 .photographer_section article {
@@ -42,6 +42,15 @@ h1 {
 .photographer_section article h2 {
     color: #D3573C;
     font-size: 36px;
+    margin-bottom: 0;
+}
+
+.photographer_section article .lieu {
+    font-size: 15px;
+    color: #D3573C;
+}
+.photographer_section article .tag {
+    font-size: 15px;
 }
 
 .photographer_section article img {
@@ -49,4 +58,8 @@ h1 {
     width: 200px;
     border-radius: 50%;
     object-fit: cover;
+}
+.photographer_section article .prix {
+    font-size: 10px;
+    color: #a39e9d;
 }
