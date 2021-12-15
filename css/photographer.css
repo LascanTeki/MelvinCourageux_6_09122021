@@ -6,6 +6,9 @@
     background-color: #FAFAFA;
     height: 300px;
     margin: 0 100px;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
 }
 
 .contact_button {
@@ -19,6 +22,7 @@
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+    margin-block: 115px;
 }
 
 .modal {
@@ -73,4 +77,12 @@ form input {
     height: 68px;
     border: none;
     border-radius: 5px;
+}
+
+.photograph-header img {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-block: 50px;
 }

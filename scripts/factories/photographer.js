@@ -15,7 +15,7 @@ function photographerFactory(data) {
 
         //lien autour de l'image
         const image = document.createElement( 'a' );
-        image.setAttribute("href", 'photographer.html');
+        image.setAttribute("href", `photographer.html?${id}`);
         image.appendChild(img);
 
         //nom de l'artiste
