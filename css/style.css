@@ -39,21 +39,21 @@ h1 {
     flex-direction: column;
 }
 
-.photographer_section article h2 {
+  h2 {
     color: #D3573C;
     font-size: 36px;
     margin-bottom: 0;
 }
 
-.photographer_section article .lieu {
+ .lieu {
     font-size: 15px;
     color: #D3573C;
 }
-.photographer_section article .tag {
+  .tag {
     font-size: 15px;
 }
 
-.photographer_section article img {
+.photographer_section article img, .photograph-header img {
     height: 200px;
     width: 200px;
     border-radius: 50%;

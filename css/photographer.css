@@ -1,5 +1,11 @@
 #contact_modal {
     display: none;
+    position: static;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 100;
+    top: 25%;
 }
 
 .photograph-header {
@@ -8,7 +14,7 @@
     margin: 0 100px;
     display: flex;
     justify-content: space-around;
-    text-align: center;
+    align-items: center;
 }
 
 .contact_button {
@@ -22,7 +28,6 @@
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
-    margin-block: 115px;
 }
 
 .modal {
@@ -35,6 +40,8 @@
     justify-content: space-between;
     padding: 35px;
     margin: auto;
+    position: static;
+
 }
 
 .modal header {
@@ -79,10 +86,34 @@ form input {
     border-radius: 5px;
 }
 
-.photograph-header img {
-    height: 200px;
-    width: 200px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-block: 50px;
+.Photo_title {
+    line-height: 50px;
+    text-align: left;
+}
+
+.Photo_title .lieu {
+    font-size: 20px;
+}
+
+.like{
+    position: fixed;
+    top: 890px;
+    background-color: #DB8876;
+    width: 225px;
+    padding: 10px;
+    right:36px ;
+    border-radius: 5px 5px 0px 0px;
+    font-weight: bold;
+    padding-left: 20px;
+}
+
+.heart{
+    font-size: 20px;
+    font-family: -webkit-pictograph;
+    margin-right: 55px;
+}
+
+.trie{
+margin: 35px 100px;
+font-weight: bold;
 }
