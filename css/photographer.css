@@ -95,25 +95,117 @@ form input {
     font-size: 20px;
 }
 
-.like{
+.like {
     position: fixed;
+    font-size: 19px;
     top: 890px;
     background-color: #DB8876;
     width: 225px;
     padding: 10px;
-    right:36px ;
+    right: 36px;
     border-radius: 5px 5px 0px 0px;
     font-weight: bold;
     padding-left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
-.heart{
-    font-size: 20px;
+.heart {
     font-family: -webkit-pictograph;
-    margin-right: 55px;
 }
 
-.trie{
-margin: 35px 100px;
-font-weight: bold;
+.like .heart {
+    margin-right: 75px;
+    font-size: 20px;
+    margin-bottom: 3px;
+}
+
+.photograph-pics {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.photograph-pics img, .photograph-pics video {
+
+    width: 350px;
+    height: 300px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.cont {
+    margin: 50px 95px;
+    font-size: 24px;
+    color: #911C1C;
+    line-height: 31px;
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.trie {
+    margin: 35px 100px;
+    font-weight: bold;
+    display: flex;
+    font-size: 18px;
+    align-items: center;
+}
+
+#box {
+    position: absolute;
+    margin-left: 110px;
+    margin-top: 8px;
+    font-size: 18px;
+    color: white;
+    padding: 11px;
+    width: 110px;
+    height: fit-content;
+    background-color: #901C1C;
+    border-radius: 5px;
+    font-weight: normal;
+    display: flex;
+    flex-direction: column;
+    line-height: 38px;
+    cursor: pointer;
+    
+}
+
+#box.responsive{
+    margin-top: 86px;
+}
+
+#box .trie-box2, #box .trie-box3  {
+    display: none;
+    border-top: white 1px solid;
+}
+
+#box.responsive .trie-box2, #box.responsive .trie-box3 {
+    font-weight: normal;
+    display: flex;
+}
+
+#box.responsive a:hover {
+    color: #DB8876;
+}
+
+#box span{
+
+    position: absolute;
+    margin-left: 95px;
+    font-size: 40px;
+    margin-top: 12px;
+}
+
+#box .arrow2{
+
+    -webkit-transform: rotate(180deg) translatey(27px);
+
 }
