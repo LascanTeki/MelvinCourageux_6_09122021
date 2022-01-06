@@ -87,8 +87,7 @@ async function displayData(photographers, likecount) {
 
             //"contactez moi" bouton
             const button = document.createElement('button');
-            button.setAttribute("class", 'contact_button');
-            button.setAttribute("onclick", 'displayModal()');
+            button.setAttribute("class", 'conta_button');
             button.textContent = "Contactez-moi";
 
             //nom
@@ -139,6 +138,8 @@ async function displayData(photographers, likecount) {
         }
     });
 };
+
+// display images
 
 async function displayMedia(media){
 
@@ -209,10 +210,11 @@ function editNav() {
     }
 }
 
-function change2(media) {
+//change images and order of list when clicking on filter
+
+function change2(media, Two) {
 
     const nav = document.getElementById('one');
-    const Two = document.querySelector('.trie-box2');
     const under = document.querySelector(".photograph-pics");
 
     var store = Two.textContent;
@@ -238,33 +240,7 @@ function change2(media) {
     displayMedia(media);
 }
 
-function change3(media) {
 
-    const nav = document.getElementById('one');
-    const Two = document.querySelector('.trie-box3');
-    const under = document.querySelector(".photograph-pics");
-
-    var store = Two.textContent;
-
-    Two.textContent = nav.textContent;
-    nav.textContent  = store;
-
-    under.innerHTML = "";
-    media.sort(function (a, b) {
-        if (nav.textContent=="Popularité"){
-                var dateA = new Date(a.likes), dateB = new Date(b.likes)
-                return dateB - dateA
-        }
-        if (nav.textContent=="Date"){
-                var dateA = new Date(a.date), dateB = new Date(b.date) 
-                return dateB - dateA  
-        }
-        if (nav.textContent=="Titre"){
-            return a.title.localeCompare(b.title);
-        }
-});
-    displayMedia(media);
-}
 
 async function init() {
     // Récupère les datas des photographes
@@ -284,12 +260,16 @@ async function init() {
     Three.addEventListener( "click", chang);
 
     function change(){
-        change2(media);
+        change2(media, Two);
     }
     function chang(){
-        change3(media);
+        change2(media, Three);
     }
 
+    const clos = document.querySelector(".close");
+    const button = document.querySelector(".conta_button");
+    clos.addEventListener( "click", closeModal);
+    button.addEventListener( "click", displayModal);
 
 };
 

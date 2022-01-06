@@ -1,4 +1,6 @@
+
 function displayModal() {
+    console.log("start");
     const modal = document.getElementById("contact_modal");
 	modal.style.display = "block";
 }
