@@ -19,6 +19,7 @@ async function getPick() {
     const arrow = document.createElement('span');
     arrow.textContent = "ˇ";
     arrow.setAttribute("id", "arrow");
+    arrow.setAttribute("class", "arrow");
     box.appendChild(arrow);
 
 
