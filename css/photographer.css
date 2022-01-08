@@ -98,7 +98,7 @@ form input {
 .like {
     position: fixed;
     font-size: 19px;
-    top: 890px;
+    bottom: 0px;
     background-color: #DB8876;
     width: 225px;
     padding: 10px;
