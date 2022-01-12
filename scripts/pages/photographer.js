@@ -142,15 +142,18 @@ async function displayData(photographers, likecount) {
 
 // display images
 
-async function displayMedia(media){
+async function displayMedia(media) {
 
+    n = 0;
     var likecount = 0
     const under = document.querySelector(".photograph-pics");
+    const light = document.getElementById("lightbox");
 
     media.forEach((med) => {
-        const { id, photographerId, title, image, video, likes } = med;
+        const { photographerId, title, image, video, likes } = med;
         if (photographerId == path) {
 
+            n = n + 1;
             var imag = 0;
             var pic = 0;
             likecount = likecount + likes;
@@ -160,15 +163,18 @@ async function displayMedia(media){
             if (med.hasOwnProperty('image')) {
                 pic = `assets/Sample Photos/${image}`;
                 imag = document.createElement('img');
+                im = document.createElement('img');
             }
             else {
                 pic = `assets/Sample Photos/${video}`;
                 imag = document.createElement('video');
                 imag.setAttribute("controls", "controls");
+                im = document.createElement('video');
+                im.setAttribute("controls", "controls");
             }
 
             imag.setAttribute("src", pic);
-
+            imag.setAttribute("onclick", `currentSlide(${n})`);
 
             //likes
             const heart = document.createElement('span');
@@ -189,8 +195,28 @@ async function displayMedia(media){
             cont.appendChild(ti);
 
             //put it in the page
-
             under.appendChild(cont);
+
+
+            //MODAL
+
+            //image
+            im.setAttribute("src", pic);
+
+            //title
+            const titl = document.createElement('div');
+            titl.setAttribute("class", "titl");
+            titl.textContent = title;
+
+            //modal container
+            const ima = document.createElement('div');
+            ima.setAttribute("class", `mySlides`);
+            ima.appendChild(im);
+            ima.appendChild(titl);
+
+            //put it in the modal
+            light.appendChild(ima);
+
         }
     });
 
@@ -217,31 +243,72 @@ function change2(media, Two) {
 
     const nav = document.getElementById('one');
     const under = document.querySelector(".photograph-pics");
+    const light = document.getElementById("lightbox");
 
     var store = Two.textContent;
 
     Two.textContent = nav.textContent;
-    nav.textContent  = store;
-
+    nav.textContent = store;
+    light.innerHTML = `<div class="x">x</div><div class="leftarrow"> &lt; </div><div class="rightarrow"> &gt; </div>`;
     under.innerHTML = "";
+
     media.sort(function (a, b) {
-    if (nav.textContent=="Popularité"){
+        if (nav.textContent == "Popularité") {
             var dateA = new Date(a.likes), dateB = new Date(b.likes)
             return dateB - dateA
-    }
-    if (nav.textContent=="Date"){
-            var dateA = new Date(a.date), dateB = new Date(b.date) 
-            return dateB - dateA  
-    }
-    if (nav.textContent=="Titre"){
-        return a.title.localeCompare(b.title);
-    }
-    
-});
+        }
+        if (nav.textContent == "Date") {
+            var dateA = new Date(a.date), dateB = new Date(b.date)
+            return dateB - dateA
+        }
+        if (nav.textContent == "Titre") {
+            return a.title.localeCompare(b.title);
+        }
+
+    });
+
     displayMedia(media);
+
+    //consts pour lightbox
+    const right = document.querySelector('.rightarrow');
+    const left = document.querySelector('.leftarrow');
+    const lightbox = document.querySelector('.x');
+    //events pour lightbox
+    lightbox.addEventListener("click", closelight);
+    right.addEventListener("click", righ);
+    left.addEventListener("click", lef);
+
 }
 
 
+function currentSlide(n) {
+    showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+    document.getElementById("lightbox").style.display = "flex";
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    if (n > slides.length) { slideIndex = 1 }
+    if (n < 1) { slideIndex = slides.length }
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+
+    slides[slideIndex - 1].style.display = "flex";
+}
+
+function closelight() {
+    document.getElementById("lightbox").style.display = "none";
+}
+
+function righ() {
+    showSlides(slideIndex += 1);
+}
+
+function lef() {
+    showSlides(slideIndex += -1);
+}
 
 async function init() {
     // Récupère les datas des photographes
@@ -250,27 +317,40 @@ async function init() {
     getPick()
     var like = await displayMedia(media);
     displayData(photographers, like);
-    
 
+    //consts pour trier
     const nav = document.getElementById('one');
     const Two = document.querySelector('.trie-box2');
     const Three = document.querySelector('.trie-box3');
+    //consts pour lightbox
+    const light = document.querySelector('.x');
+    const right = document.querySelector('.rightarrow');
+    const left = document.querySelector('.leftarrow');
 
+    //events pour trier
     nav.addEventListener("click", editNav);
-    Two.addEventListener( "click", change);
-    Three.addEventListener( "click", chang);
+    Two.addEventListener("click", change);
+    Three.addEventListener("click", chang);
+    //events pour lightbox
+    light.addEventListener("click", closelight);
+    right.addEventListener("click", righ);
+    left.addEventListener("click", lef);
+    //lightbox arrows
 
-    function change(){
+
+    //boot trier
+    function change() {
         change2(media, Two);
     }
-    function chang(){
+    function chang() {
         change2(media, Three);
     }
 
+    //modal events
     const clos = document.querySelector(".close");
     const button = document.querySelector(".conta_button");
-    clos.addEventListener( "click", closeModal);
-    button.addEventListener( "click", displayModal);
+    clos.addEventListener("click", closeModal);
+    button.addEventListener("click", displayModal);
 
 };
 

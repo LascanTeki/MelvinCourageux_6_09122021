@@ -2,7 +2,7 @@
 function displayModal() {
     console.log("start");
     const modal = document.getElementById("contact_modal");
-	modal.style.display = "block";
+	modal.style.display = "flex";
 }
 
 function closeModal() {

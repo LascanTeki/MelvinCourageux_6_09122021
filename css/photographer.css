@@ -5,7 +5,8 @@
     width: 100%;
     position: fixed;
     z-index: 100;
-    top: 25%;
+    top: 0;
+    background-color: rgba(200, 200, 200, 0.8);
 }
 
 .photograph-header {
@@ -33,7 +34,7 @@
 .modal {
     border-radius: 5px;
     background-color: #DB8876;
-    width: 50%;
+    width: 526px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -130,10 +131,11 @@ form input {
 
 .photograph-pics img, .photograph-pics video {
 
-    width: 350px;
-    height: 300px;
+    width: 400px;
+    height: 350px;
     border-radius: 5px;
     object-fit: cover;
+    cursor: pointer;
 }
 
 .cont {
@@ -208,4 +210,63 @@ form input {
 
     -webkit-transform: rotate(180deg) translatey(27px);
 
+}
+
+#lightbox{
+    position: fixed;
+    width: auto;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    display: none;
+    background-color: rgba(150, 150, 150, 0.8);
+}
+
+.rightarrow, .leftarrow, .x{
+    color: #901C1C;
+    font-size: 100px;
+    position: absolute;
+    cursor: pointer;
+}
+
+.rightarrow{
+    margin-left: 95%;
+}
+.leftarrow{
+    margin-right: 95%;
+}
+
+.x{
+    margin-left: 90%;
+    margin-bottom: 800px;
+}
+
+#lightbox img, #lightbox video{
+    height: 70%;
+    margin-top: 30px;
+}
+
+#lightbox .mySlides{
+    height:100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.titl{
+    color: #901C1C;
+    font-size: 30px;
+    margin-right: 43%;
+    width: 58%;
+    white-space: nowrap;
+}
+
+.Message{
+    width: 100%;
+    resize: none;
+    border-radius: 5px;
+    border: 0px;
 }
