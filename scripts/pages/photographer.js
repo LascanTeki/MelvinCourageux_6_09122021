@@ -85,6 +85,8 @@ async function displayData(photographers, likecount) {
             const picture = `assets/photographers/${portrait}`;
             const img = document.createElement('img');
             img.setAttribute("src", picture);
+            img.setAttribute("alt", name);
+
 
             //"contactez moi" bouton
             const button = document.createElement('button');
@@ -174,6 +176,7 @@ async function displayMedia(media) {
             }
 
             imag.setAttribute("src", pic);
+            imag.setAttribute("alt", title);
             imag.setAttribute("onclick", `currentSlide(${n})`);
 
             //likes
@@ -202,6 +205,7 @@ async function displayMedia(media) {
 
             //image
             im.setAttribute("src", pic);
+            im.setAttribute("alt", `${title} zoomed`);
 
             //title
             const titl = document.createElement('div');
@@ -211,6 +215,7 @@ async function displayMedia(media) {
             //modal container
             const ima = document.createElement('div');
             ima.setAttribute("class", `mySlides`);
+            
             ima.appendChild(im);
             ima.appendChild(titl);
 
@@ -280,36 +285,6 @@ function change2(media, Two) {
 
 }
 
-
-function currentSlide(n) {
-    showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-    document.getElementById("lightbox").style.display = "flex";
-    var i;
-    var slides = document.getElementsByClassName("mySlides");
-    if (n > slides.length) { slideIndex = 1 }
-    if (n < 1) { slideIndex = slides.length }
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-
-    slides[slideIndex - 1].style.display = "flex";
-}
-
-function closelight() {
-    document.getElementById("lightbox").style.display = "none";
-}
-
-function righ() {
-    showSlides(slideIndex += 1);
-}
-
-function lef() {
-    showSlides(slideIndex += -1);
-}
-
 async function init() {
     // Récupère les datas des photographes
     const { photographers } = await getPhotographers();
@@ -335,8 +310,6 @@ async function init() {
     light.addEventListener("click", closelight);
     right.addEventListener("click", righ);
     left.addEventListener("click", lef);
-    //lightbox arrows
-
 
     //boot trier
     function change() {
