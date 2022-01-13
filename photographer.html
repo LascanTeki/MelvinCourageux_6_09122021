@@ -1,56 +1,64 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <title>Fisheye - photographe </title>
-  </head>
-  <body>
-    <header>
-      <a href="index.html">
+
+<head>
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+  <title>Fisheye - photographe </title>
+</head>
+
+<body>
+  <header>
+    <a href="index.html">
       <img src="assets/images/logo.png" class="logo" alt="return home" />
-      </a>
-    </header>
-    <main id="main">
-      <div class="photograph-header">
-      </div>
-      <div class="trie">Trier par <div id="box"></div></div>
-      <div class="photograph-pics"></div>
-      <div class="like"> </div>
-      <div id="lightbox"><div class="x">x</div><div class="leftarrow"> &lt; </div><div class="rightarrow"> &gt; </div></div>
+    </a>
+  </header>
+  <main id="main">
+    <div class="photograph-header">
+    </div>
+    <div class="trie">Trier par <div id="box"></div>
+    </div>
+    <div class="photograph-pics"></div>
+    <div class="like"> </div>
+    <div id="lightbox">
+      <div class="x">x</div>
+      <div class="leftarrow"> &lt; </div>
+      <div class="rightarrow"> &gt; </div>
+    </div>
 
 
-    </main>
+  </main>
 
-    <div id="contact_modal">
-			<div class="modal">
-				<header>
-          <h2 id="contact">Contactez-moi</h2>
-          <img class="close" src="assets/icons/close.svg" alt="close contact form"/>
-        </header>
-				<form>
-					<div>
-						<label>Prénom
-						<input />
+  <div id="contact_modal">
+    <div class="modal">
+      <header>
+        <h2 id="contact">Contactez-moi</h2>
+        <img class="close" src="assets/icons/close.svg" alt="close contact form" />
+      </header>
+      <form>
+        <div>
+          <label for="Prénom">Prénom
+            <input />
           </label>
-            <label>Nom
-						<input />
+          <label for="Nom" >Nom
+            <input />
+          </label for="Email">
+          <label>Email
+            <input />
           </label>
-            <label>Email
-						<input />
-          </label>
-            <label>Votre Message
-						<textarea rows="8" class="Message">
+          <label for="Message à envoyer">Votre Message
+            <textarea rows="8" class="Message">
             </textarea>
           </label>
-					</div>
-          <button class="contact_button">Envoyer</button>
-				</form>
-			</div>
-		</div>
-    <script src="scripts/utils/contactForm.js"></script>
-    <script src="scripts/pages/photographer.js"></script>
-  </body>
+        </div>
+        <button class="contact_button">Envoyer</button>
+      </form>
+    </div>
+  </div>
+  <script src="scripts/utils/contactForm.js"></script>
+  <script src="scripts/pages/photographer.js"></script>
+</body>
+
 </html>
