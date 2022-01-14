@@ -116,6 +116,7 @@ async function displayData(photographers, likecount) {
 
             //like count
             const li = document.createElement('span');
+           li.setAttribute("class", 'likes');
             li.textContent = likecount;
             prix.appendChild(li);
 
@@ -244,7 +245,7 @@ function editNav() {
 
 //change images and order of list when clicking on filter
 
-function change2(media, Two) {
+function change(media, Two) {
 
     const nav = document.getElementById('one');
     const under = document.querySelector(".photograph-pics");
@@ -274,17 +275,16 @@ function change2(media, Two) {
 
     displayMedia(media);
 
-    //consts pour lightbox
+    //consts for lightbox
     const right = document.querySelector('.rightarrow');
     const left = document.querySelector('.leftarrow');
     const lightbox = document.querySelector('.x');
-    //events pour lightbox
+    //events for lightbox
     lightbox.addEventListener("click", closelight);
     right.addEventListener("click", righ);
     left.addEventListener("click", lef);
 
 }
-
 async function init() {
     // Récupère les datas des photographes
     const { photographers } = await getPhotographers();
@@ -293,30 +293,54 @@ async function init() {
     var like = await displayMedia(media);
     displayData(photographers, like);
 
-    //consts pour trier
+    //consts for sorting
     const nav = document.getElementById('one');
     const Two = document.querySelector('.trie-box2');
     const Three = document.querySelector('.trie-box3');
-    //consts pour lightbox
+    //consts for lightbox
     const light = document.querySelector('.x');
     const right = document.querySelector('.rightarrow');
     const left = document.querySelector('.leftarrow');
+    //like consts
+    const liking = document.getElementsByClassName('heart');
 
-    //events pour trier
+    //events for sorting
     nav.addEventListener("click", editNav);
     Two.addEventListener("click", change);
     Three.addEventListener("click", chang);
-    //events pour lightbox
+    //events for lightbox
     light.addEventListener("click", closelight);
     right.addEventListener("click", righ);
     left.addEventListener("click", lef);
+    //Event like
+    for (var i = 0; i < liking.length; i++) {
+    liking[i].addEventListener("click", function(e){
+        var target = e.target 
+        var total = document.getElementsByClassName('likes')[0].textContent;
+        text = target.textContent.match(/\d+/)[0];
+        if (e.target.id != "check"){
+        text++;
+        total++;
+        e.target.id = "check";
+        }
+        else{
+        text--;
+        total--;
+        e.target.id = "";
 
-    //boot trier
+        }
+        document.getElementsByClassName('likes')[0].textContent=total;
+        e.target.textContent=`${text} ♥`;
+
+    });
+}
+
+    //boot sorting
     function change() {
-        change2(media, Two);
+        change(media, Two);
     }
     function chang() {
-        change2(media, Three);
+        change(media, Three);
     }
 
     //modal events

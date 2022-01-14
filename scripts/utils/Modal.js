@@ -42,6 +42,7 @@ function showSlides(n) {
 
 function closelight() {
     document.getElementById("lightbox").style.display = "none";
+    //remove lightbox arrows
     document.removeEventListener('keydown', check);
 }
 
