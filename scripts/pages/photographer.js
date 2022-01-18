@@ -5,6 +5,7 @@ const urlParams = new URLSearchParams(queryString);
 const path = urlParams.get('id')
 
 //Sort button
+
 async function getPick() {
 
     var One = "Popularité";
@@ -77,6 +78,15 @@ async function displayData(photographers, likecount) {
     const photographersSection = document.querySelector(".photograph-header");
     const prix = document.querySelector(".like");
 
+    console.log(photographers);
+
+    function filt(photographer) {
+        console.log(photographer.id === path);
+        return photographer.id === path;
+    }
+
+    console.log(photographers.filter(filt));
+
     photographers.forEach((photographer) => {
         const { name, portrait, id, tagline, city, country, price } = photographer;
         if (id == path) {
@@ -86,6 +96,7 @@ async function displayData(photographers, likecount) {
             const img = document.createElement('img');
             img.setAttribute("src", picture);
             img.setAttribute("alt", name);
+            img.setAttribute("tabindex", "0")
 
 
             //"contactez moi" bouton
@@ -96,6 +107,7 @@ async function displayData(photographers, likecount) {
             //nom
             const photoname = document.createElement('h2');
             photoname.textContent = name;
+            photoname.setAttribute("tabindex", "0")
 
             //city
             const lieu = document.createElement('div');
@@ -107,16 +119,22 @@ async function displayData(photographers, likecount) {
             tag.setAttribute("class", "tag")
             tag.textContent = tagline;
 
+            //div city + quote
+
+            const tab = document.createElement('div');
+            tab.appendChild(lieu);
+            tab.appendChild(tag);
+            tab.setAttribute("tabindex", "0")
+
             //div contenant nom + city + quote
             const titre = document.createElement('div');
             titre.setAttribute("class", 'Photo_title');
             titre.appendChild(photoname);
-            titre.appendChild(lieu);
-            titre.appendChild(tag);
+            titre.appendChild(tab);
 
             //like count
             const li = document.createElement('span');
-           li.setAttribute("class", 'likes');
+            li.setAttribute("class", 'likes');
             li.textContent = likecount;
             prix.appendChild(li);
 
@@ -171,32 +189,40 @@ async function displayMedia(media) {
             else {
                 pic = `assets/Sample Photos/${video}`;
                 imag = document.createElement('video');
-                imag.setAttribute("controls", "controls");
                 im = document.createElement('video');
                 im.setAttribute("controls", "controls");
             }
 
+            imag.setAttribute("tabindex", "0")
             imag.setAttribute("src", pic);
-            imag.setAttribute("alt", title);
+            imag.setAttribute("alt", ` ${title}, closeup view`);
             imag.setAttribute("onclick", `currentSlide(${n})`);
+            imag.setAttribute("onkeypress", `currentSlide(${n})`);
 
             //likes
             const heart = document.createElement('span');
             heart.setAttribute("class", "heart");
             heart.textContent = `${likes} ♥`;
+            heart.setAttribute("tabindex", "0")
 
             //title
             const ti = document.createElement('div');
-            ti.setAttribute("class", "title");
+            ti.setAttribute("tabindex", "0")
             ti.textContent = title;
-            ti.appendChild(heart);
+
+            //title + heart container
+            const tit = document.createElement('div');
+            tit.setAttribute("class", "title");
+            tit.appendChild(ti);
+            tit.appendChild(heart);
+
 
             //container
 
             const cont = document.createElement('div');
             cont.setAttribute("class", "cont");
             cont.appendChild(imag);
-            cont.appendChild(ti);
+            cont.appendChild(tit);
 
             //put it in the page
             under.appendChild(cont);
@@ -206,17 +232,19 @@ async function displayMedia(media) {
 
             //image
             im.setAttribute("src", pic);
-            im.setAttribute("alt", `${title} zoomed`);
+            im.setAttribute("alt", `${title}`);
+            im.setAttribute("tabindex", "2")
 
             //title
             const titl = document.createElement('div');
             titl.setAttribute("class", "titl");
             titl.textContent = title;
+            titl.setAttribute("tabindex", "3")
 
             //modal container
             const ima = document.createElement('div');
             ima.setAttribute("class", `mySlides`);
-            
+            ima.setAttribute("aria-label", "image closeup view")
             ima.appendChild(im);
             ima.appendChild(titl);
 
@@ -236,9 +264,13 @@ function editNav() {
     var arrow = document.getElementById("arrow");
     if (x.className == "") {
         x.className += " responsive";
+        x.setAttribute("aria-haspopup", "listbox");
+        x.setAttribute("aria-expanded", "true");
         arrow.className += "2";
     } else {
         x.className = "";
+        x.removeAttribute("aria-haspopup");
+        x.setAttribute("aria-expanded", "false");
         arrow.className = "arrow";
     }
 }
@@ -247,6 +279,7 @@ function editNav() {
 
 function change(media, Two) {
 
+    const box = document.getElementById('box');
     const nav = document.getElementById('one');
     const under = document.querySelector(".photograph-pics");
     const light = document.getElementById("lightbox");
@@ -255,8 +288,12 @@ function change(media, Two) {
 
     Two.textContent = nav.textContent;
     nav.textContent = store;
-    light.innerHTML = `<div class="x">x</div><div class="leftarrow"> &lt; </div><div class="rightarrow"> &gt; </div>`;
+    light.innerHTML = `<div class="x" tabindex="6" aria-label="close dialog">x</div>
+    <div class="leftarrow" tabindex="4" aria-label="Previous Image"> &lt; </div>
+    <div class="rightarrow" tabindex="5" aria-label="Next image"> &gt; </div>`;
     under.innerHTML = "";
+
+    
 
     media.sort(function (a, b) {
         if (nav.textContent == "Popularité") {
@@ -272,6 +309,7 @@ function change(media, Two) {
         }
 
     });
+    box.setAttribute("aria-label", `Trier par ${store}`);
 
     displayMedia(media);
 
@@ -285,6 +323,11 @@ function change(media, Two) {
     left.addEventListener("click", lef);
 
 }
+
+
+
+
+
 async function init() {
     // Récupère les datas des photographes
     const { photographers } = await getPhotographers();
@@ -292,9 +335,12 @@ async function init() {
     getPick()
     var like = await displayMedia(media);
     displayData(photographers, like);
+    var n = 0;
+
 
     //consts for sorting
     const nav = document.getElementById('one');
+    const box = document.getElementById('box');
     const Two = document.querySelector('.trie-box2');
     const Three = document.querySelector('.trie-box3');
     //consts for lightbox
@@ -304,43 +350,66 @@ async function init() {
     //like consts
     const liking = document.getElementsByClassName('heart');
 
+    var Nav = function (e) {
+
+
+        if (e.keyCode == '13') {
+            editNav();
+        }
+        if (e.keyCode == '40') {
+            e.preventDefault();
+            if (n == 0) {
+                change(media, Two);
+                n=1;
+            }
+            else {
+                change(media, Three);
+                n=0;
+            }
+        }
+
+    }
+
     //events for sorting
+    box.addEventListener('keydown', Nav);
     nav.addEventListener("click", editNav);
-    Two.addEventListener("click", change);
+    Two.addEventListener("click", chan);
     Three.addEventListener("click", chang);
     //events for lightbox
     light.addEventListener("click", closelight);
     right.addEventListener("click", righ);
     left.addEventListener("click", lef);
-    //Event like
-    for (var i = 0; i < liking.length; i++) {
-    liking[i].addEventListener("click", function(e){
-        var target = e.target 
-        var total = document.getElementsByClassName('likes')[0].textContent;
-        text = target.textContent.match(/\d+/)[0];
-        if (e.target.id != "check"){
-        text++;
-        total++;
-        e.target.id = "check";
-        }
-        else{
-        text--;
-        total--;
-        e.target.id = "";
-
-        }
-        document.getElementsByClassName('likes')[0].textContent=total;
-        e.target.textContent=`${text} ♥`;
-
-    });
-}
 
     //boot sorting
-    function change() {
+    function chan() {
         change(media, Two);
     }
     function chang() {
         change(media, Three);
+    }
+
+
+    //Event like
+    for (var i = 0; i < liking.length; i++) {
+        liking[i].addEventListener("click", function (e) {
+            var target = e.target
+            var total = document.getElementsByClassName('likes')[0].textContent;
+            text = target.textContent.match(/\d+/)[0];
+            if (e.target.id != "check") {
+                text++;
+                total++;
+                e.target.id = "check";
+            }
+            else {
+                text--;
+                total--;
+                e.target.id = "";
+
+            }
+            document.getElementsByClassName('likes')[0].textContent = total;
+            e.target.textContent = `${text} ♥`;
+
+        });
     }
 
     //modal events

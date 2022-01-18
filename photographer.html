@@ -10,26 +10,21 @@
 </head>
 
 <body>
-  <header>
+  <header id="header">
     <a href="index.html">
-      <img src="assets/images/logo.png" class="logo" alt="return home" />
+      <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page" />
     </a>
   </header>
   <main id="main">
     <div class="photograph-header">
     </div>
-    <div class="trie">Trier par <div id="box"></div>
+    <div class="like" tabindex="0"> </div>
+    <div class="trie" tabindex="0" aria-label="Trier par">Trier par <div id="box" tabindex="0" aria-live="assertive" aria-label="Trier par Popularitée"></div>
     </div>
     <div class="photograph-pics"></div>
-    <div class="like"> </div>
-    <div id="lightbox">
-      <div class="x">x</div>
-      <div class="leftarrow"> &lt; </div>
-      <div class="rightarrow"> &gt; </div>
-    </div>
-
-
   </main>
+
+
 
   <div id="contact_modal">
     <div class="modal">
@@ -40,15 +35,15 @@
       <form>
         <div>
           <label for="Prénom">Prénom</label>
-            <input name="Prénom"/>
+            <input id="Prénom"/>
           <label for="Nom" >Nom</label>
-            <input name="Nom" />
+            <input id="Nom" />
           
           <label for="Email">Email</label>
-            <input name="Email"/>
+            <input id="Email"/>
           
           <label for="Message">Votre Message </label>
-            <textarea rows="8" class="Message" name="Message">
+            <textarea rows="8" class="Message" id="Message">
             </textarea>
          
         </div>
@@ -56,8 +51,16 @@
       </form>
     </div>
   </div>
+  <div id="lightbox" tabindex="1" aria-label="image closeup view">
+    <div class="x" tabindex="6" aria-label="close dialog">x</div>
+    <div class="leftarrow" tabindex="4" aria-label="Previous Image"> &lt; </div>
+    <div class="rightarrow" tabindex="5" aria-label="Next image"> &gt; </div>
+  </div>
+  
+
   <script src="scripts/utils/Modal.js"></script>
   <script src="scripts/pages/photographer.js"></script>
 </body>
+
 
 </html>

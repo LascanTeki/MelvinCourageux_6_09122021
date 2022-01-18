@@ -61,6 +61,15 @@ h1 {
     object-fit: cover;
 }
 .photographer_section article .prix {
-    font-size: 10px;
-    color: #a39e9d;
+    font-size: 11px;
+    color: #575252;
+}
+
+article a, article div{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+
 }

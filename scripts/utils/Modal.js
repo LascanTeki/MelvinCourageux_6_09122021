@@ -3,13 +3,16 @@ function displayModal() {
     console.log("start");
     const modal = document.getElementById("contact_modal");
 	modal.style.display = "flex";
+    document.getElementById("main").style.display = "none";
+    document.getElementById('header').style.display = "none";
 }
 
 function closeModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "none";
+    document.getElementById("main").style.display = "block";
+    document.getElementById('header').style.display = "block";
 }
-
 
 var check =  function(e) {
     if (e.keyCode == '37') {
@@ -17,6 +20,9 @@ var check =  function(e) {
      }
      else if (e.keyCode == '39') {
         righ();
+     }
+     else if (e.keyCode == '27') {
+        closelight();
      }
 };
 
@@ -29,6 +35,8 @@ function currentSlide(n) {
 
 function showSlides(n) {
     document.getElementById("lightbox").style.display = "flex";
+    document.getElementById("main").style.display = "none";
+    document.getElementById('header').style.display = "none";
     var i;
     var slides = document.getElementsByClassName("mySlides");
     if (n > slides.length) { slideIndex = 1 }
@@ -42,6 +50,8 @@ function showSlides(n) {
 
 function closelight() {
     document.getElementById("lightbox").style.display = "none";
+    document.getElementById("main").style.display = "block";
+    document.getElementById('header').style.display = "block";
     //remove lightbox arrows
     document.removeEventListener('keydown', check);
 }
