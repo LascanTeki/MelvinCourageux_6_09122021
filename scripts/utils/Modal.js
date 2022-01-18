@@ -14,6 +14,14 @@ function closeModal() {
     document.getElementById('header').style.display = "block";
 }
 
+var submit = function(e){  
+    e.preventDefault();
+    console.log(document.getElementById("Prénom").value)
+    console.log(document.getElementById("Nom").value)
+    console.log( document.getElementById("Email").value)
+    console.log( document.getElementById("Message").value)
+}
+
 var check =  function(e) {
     if (e.keyCode == '37') {
         lef();

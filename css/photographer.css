@@ -18,7 +18,9 @@
     align-items: center;
 }
 
-.contact_button, .conta_button {
+
+
+#contact_button, .conta_button {
     font-size: 20px;
     font-weight: bold;
     color: white;
@@ -85,6 +87,7 @@ form input {
     height: 68px;
     border: none;
     border-radius: 5px;
+    font-size:x-large;
 }
 
 .Photo_title {
@@ -274,6 +277,7 @@ form input {
     resize: none;
     border-radius: 5px;
     border: 0px;
+    font-size:x-large;
 }
 
 label{

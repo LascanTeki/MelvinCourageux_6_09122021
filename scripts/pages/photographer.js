@@ -349,6 +349,8 @@ async function init() {
     const left = document.querySelector('.leftarrow');
     //like consts
     const liking = document.getElementsByClassName('heart');
+    //modal button
+    const conta = document.getElementById('contact_button');
 
     var Nav = function (e) {
 
@@ -379,6 +381,8 @@ async function init() {
     light.addEventListener("click", closelight);
     right.addEventListener("click", righ);
     left.addEventListener("click", lef);
+    //modal event
+    conta.addEventListener("click", submit);
 
     //boot sorting
     function chan() {
