@@ -45,7 +45,6 @@ var check3=  function(e) {
 };
 
 //Check which key is pressed when the lightbox is displayed
-
 var check =  function(e) {
     if (e.keyCode == '37') {
         lef();

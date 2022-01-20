@@ -5,7 +5,6 @@ const urlParams = new URLSearchParams(queryString);
 const path = urlParams.get('id')
 
 //Sort button
-
 async function getPick() {
 
     var One = "Popularité";
@@ -69,7 +68,6 @@ async function getMedia() {
         media: [...media]
     })
 }
-
 
 //Display the profile
 
@@ -215,9 +213,7 @@ async function displayMedia(media) {
             tit.appendChild(ti);
             tit.appendChild(heart);
 
-
             //container
-
             const cont = document.createElement('div');
             cont.setAttribute("class", "cont");
             cont.appendChild(imag);
@@ -225,7 +221,6 @@ async function displayMedia(media) {
 
             //put it in the page
             under.appendChild(cont);
-
 
             //MODAL
 
@@ -293,7 +288,7 @@ function change(media, Two) {
     <div class="leftarrow" tabindex="4" aria-label="Previous Image"> &lt; </div>
     <div class="rightarrow" tabindex="5" aria-label="Next image"> &gt; </div>`;
 
-
+    //empties images before replacing them
     under.innerHTML = "";
 
     //sorting
@@ -423,8 +418,3 @@ async function init() {
 };
 
 init();
-
-
-
-
-
