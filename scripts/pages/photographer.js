@@ -23,7 +23,6 @@ async function getPick() {
     arrow.setAttribute("class", "arrow");
     box.appendChild(arrow);
 
-
     const second = document.createElement('a');
     second.textContent = Two;
     second.setAttribute("class", "trie-box2");
@@ -77,15 +76,7 @@ async function getMedia() {
 async function displayData(photographers, likecount) {
     const photographersSection = document.querySelector(".photograph-header");
     const prix = document.querySelector(".like");
-
-    console.log(photographers);
-
-    function filt(photographer) {
-        console.log(photographer.id === path);
-        return photographer.id === path;
-    }
-
-    console.log(photographers.filter(filt));
+    const modal = document.getElementById("contact");
 
     photographers.forEach((photographer) => {
         const { name, portrait, id, tagline, city, country, price } = photographer;
@@ -143,20 +134,25 @@ async function displayData(photographers, likecount) {
             const he = document.createElement('span');
             he.setAttribute("class", "heart")
             he.textContent = "♥";
+            he.setAttribute("aria-label", `likes`)
             prix.appendChild(he);
 
 
             //price in corner
             const pri = document.createElement('span');
             pri.textContent = `${price}€/jour`;
+            pri.setAttribute("aria-label", `${price}€ par jour`)
             prix.appendChild(pri);
 
-
+            //contact title
+            const ti = document.createElement('spawn');
+            ti.textContent =` ${name}`;
 
             //put everything in right place
             photographersSection.appendChild(titre);
             photographersSection.appendChild(button);
             photographersSection.appendChild(img);
+            modal.appendChild(ti);
         }
     });
 };
@@ -174,9 +170,10 @@ async function displayMedia(media) {
         const { photographerId, title, image, video, likes } = med;
         if (photographerId == path) {
 
-            n = n + 1;
-            var imag = 0;
-            var pic = 0;
+            //n = number of the image
+            n++;
+
+            //counts the total number of likes
             likecount = likecount + likes;
 
             //set up image or video
@@ -185,17 +182,18 @@ async function displayMedia(media) {
                 pic = `assets/Sample Photos/${image}`;
                 imag = document.createElement('img');
                 im = document.createElement('img');
+                imag.setAttribute("alt", `${title}, closeup view`);
             }
             else {
                 pic = `assets/Sample Photos/${video}`;
                 imag = document.createElement('video');
+                imag.setAttribute("aria-label", `${title}, closeup view`);
                 im = document.createElement('video');
                 im.setAttribute("controls", "controls");
             }
 
             imag.setAttribute("tabindex", "0")
             imag.setAttribute("src", pic);
-            imag.setAttribute("alt", ` ${title}, closeup view`);
             imag.setAttribute("onclick", `currentSlide(${n})`);
             imag.setAttribute("onkeypress", `currentSlide(${n})`);
 
@@ -203,6 +201,7 @@ async function displayMedia(media) {
             const heart = document.createElement('span');
             heart.setAttribute("class", "heart");
             heart.textContent = `${likes} ♥`;
+            heart.setAttribute("aria-label", `${likes} likes`)
             heart.setAttribute("tabindex", "0")
 
             //title
@@ -284,17 +283,20 @@ function change(media, Two) {
     const under = document.querySelector(".photograph-pics");
     const light = document.getElementById("lightbox");
 
+    //stores name of one of the sorting button being swapped, swap them
     var store = Two.textContent;
-
     Two.textContent = nav.textContent;
     nav.textContent = store;
+
+    //puts arrows and x button back after sorting
     light.innerHTML = `<div class="x" tabindex="6" aria-label="close dialog">x</div>
     <div class="leftarrow" tabindex="4" aria-label="Previous Image"> &lt; </div>
     <div class="rightarrow" tabindex="5" aria-label="Next image"> &gt; </div>`;
+
+
     under.innerHTML = "";
 
-    
-
+    //sorting
     media.sort(function (a, b) {
         if (nav.textContent == "Popularité") {
             var dateA = new Date(a.likes), dateB = new Date(b.likes)
@@ -307,7 +309,6 @@ function change(media, Two) {
         if (nav.textContent == "Titre") {
             return a.title.localeCompare(b.title);
         }
-
     });
     box.setAttribute("aria-label", `Trier par ${store}`);
 
@@ -317,26 +318,25 @@ function change(media, Two) {
     const right = document.querySelector('.rightarrow');
     const left = document.querySelector('.leftarrow');
     const lightbox = document.querySelector('.x');
-    //events for lightbox
+
+    //events for lightbox (scrolling and closing)
     lightbox.addEventListener("click", closelight);
     right.addEventListener("click", righ);
     left.addEventListener("click", lef);
 
 }
 
-
-
-
-
 async function init() {
+
     // Récupère les datas des photographes
     const { photographers } = await getPhotographers();
     const { media } = await getMedia();
     getPick()
     var like = await displayMedia(media);
     displayData(photographers, like);
-    var n = 0;
 
+    //switch for keyboard sorting
+    var n = 0;
 
     //consts for sorting
     const nav = document.getElementById('one');
@@ -349,12 +349,11 @@ async function init() {
     const left = document.querySelector('.leftarrow');
     //like consts
     const liking = document.getElementsByClassName('heart');
-    //modal button
+    //modal submit button
     const conta = document.getElementById('contact_button');
 
+    //keyboard events for sorting
     var Nav = function (e) {
-
-
         if (e.keyCode == '13') {
             editNav();
         }
@@ -369,7 +368,6 @@ async function init() {
                 n=0;
             }
         }
-
     }
 
     //events for sorting

@@ -9,7 +9,7 @@
   <title>Fisheye - photographe </title>
 </head>
 
-<body>
+<body  aria-hidden="true">
   <header id="header">
     <a href="index.html">
       <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page" />
@@ -27,27 +27,28 @@
 
 
   <div id="contact_modal">
-    <div class="modal">
+    <div class="modal" tabindex="0">
       <header>
-        <h2 id="contact">Contactez-moi</h2>
-        <img class="close" src="assets/icons/close.svg" alt="close contact form" />
+        <h2 id="contact" tabindex="0">Contactez-moi</h2>
+        
       </header>
       <form>
         <div>
-          <label for="Prénom">Prénom</label>
+          <label for="Prénom" tabindex="0">Prénom</label>
             <input id="Prénom"/>
-          <label for="Nom" >Nom</label>
+          <label for="Nom" tabindex="0" >Nom</label>
             <input id="Nom" />
           
-          <label for="Email">Email</label>
+          <label for="Email" tabindex="0">Email</label>
             <input id="Email"/>
           
-          <label for="Message">Votre Message </label>
+          <label for="Message" tabindex="0">Votre Message </label>
             <textarea rows="8" class="Message" id="Message"></textarea>
          
         </div>
         <button id="contact_button">Envoyer</button>
       </form>
+      <img tabindex="0" class="close" src="assets/icons/close.svg" alt="close contact form" />
     </div>
   </div>
   <div id="lightbox" tabindex="1" aria-label="image closeup view">

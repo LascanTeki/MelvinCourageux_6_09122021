@@ -5,13 +5,13 @@ async function getPhotographers() {
     const names = await response.json();
     const photographers = names.photographers;
 
-
     // et bien retourner le tableau photographers seulement une fois
     return ({
         photographers: [...photographers]
     })
 }
 
+//displays overview of the photographer
 async function displayData(photographers) {
     const photographersSection = document.querySelector(".photographer_section");
 
@@ -28,6 +28,6 @@ async function init() {
     // Récupère les datas des photographes
     const { photographers } = await getPhotographers();
     displayData(photographers);
-};
+}
 
 init();
