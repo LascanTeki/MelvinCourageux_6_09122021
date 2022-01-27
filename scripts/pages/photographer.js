@@ -339,9 +339,9 @@ async function init() {
     const Two = document.querySelector('.trie-box2');
     const Three = document.querySelector('.trie-box3');
     //consts for lightbox
-    const light = document.querySelector('.x');
-    const right = document.querySelector('.rightarrow');
-    const left = document.querySelector('.leftarrow');
+    const light = document.getElementById('x');
+    const right = document.getElementById('rightarrow');
+    const left = document.getElementById('leftarrow');
     //like consts
     const liking = document.getElementsByClassName('heart');
     //modal submit button
@@ -410,7 +410,7 @@ async function init() {
     }
 
     //modal events
-    const clos = document.querySelector(".close");
+    const clos = document.getElementById("close");
     const button = document.querySelector(".conta_button");
     clos.addEventListener("click", closeModal);
     button.addEventListener("click", displayModal);

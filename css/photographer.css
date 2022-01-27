@@ -236,21 +236,22 @@ form input {
     display: none;
 }
 
-.rightarrow, .leftarrow, .x{
+#rightarrow, #leftarrow, #x{
     color: #901C1C;
     font-size: 100px;
     position: absolute;
     cursor: pointer;
 }
 
-.rightarrow{
+#rightarrow{
     margin-left: 95%;
 }
-.leftarrow{
+
+#leftarrow{
     margin-right: 95%;
 }
 
-.x{
+#x{
     margin-left: 90%;
     margin-bottom: 800px;
 }
@@ -275,7 +276,7 @@ form input {
     white-space: nowrap;
 }
 
-.Message{
+#Message{
     width: 100%;
     resize: none;
     border-radius: 5px;

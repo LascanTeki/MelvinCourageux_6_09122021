@@ -1,17 +1,47 @@
+var x = 0;
 
 //displays message modal
 function displayModal() {
     const modal = document.getElementById("contact_modal");
-	modal.style.display = "flex";
+    modal.style.display = "flex";
 
-    //make background elements disapear
-    document.getElementById("main").style.display = "none";
-    document.getElementById('header').style.display = "none";
+    //trap tab in the modal
+
+    document.addEventListener('keydown', trap);
 
     //events to close modal with keyboard
-    const close = document.querySelector('.close');
+    const close = document.getElementById('close');
     close.addEventListener('keydown', check3);
     document.addEventListener('keydown', check2);
+}
+
+var trap = function (e) {
+    var focusableEls = document.querySelectorAll('.focus');
+    console.log(focusableEls);
+
+    if (e.keyCode == 9) {
+
+        console.log("tab");
+        e.preventDefault();
+        if (e.shiftKey) {
+            if (x == 0) {
+                x = 10;
+            }
+            else
+                x--;
+        }
+        else {
+            console.log("tabbing");
+            if (x == 10) {
+                x = 0;
+            }
+            else {
+                x++;
+            }
+        }
+        console.log(x);
+        focusableEls[x].focus();
+    }
 }
 
 //closes the message modal
@@ -21,47 +51,61 @@ function closeModal() {
     document.getElementById("main").style.display = "block";
     document.getElementById('header').style.display = "block";
     document.removeEventListener('keydown', check2);
+    document.removeEventListener('keydown', trap);
 }
 
 //puts infos of the message modal in the console 
-var submit = function(e){  
+var submit = function (e) {
     e.preventDefault();
     console.log(document.getElementById("Prénom").value)
     console.log(document.getElementById("Nom").value)
-    console.log( document.getElementById("Email").value)
-    console.log( document.getElementById("Message").value)
+    console.log(document.getElementById("Email").value)
+    console.log(document.getElementById("Message").value)
 }
 
 //modal closing with keyboard
-var check2 =  function(e) {
+var check2 = function (e) {
     if (e.keyCode == '27') {
         closeModal();
-     }
+    }
 };
-var check3=  function(e) {
+var check3 = function (e) {
     if (e.keyCode == '13') {
         closeModal();
-     }
+    }
 };
 
 //Check which key is pressed when the lightbox is displayed
-var check =  function(e) {
+var check = function (e) {
     if (e.keyCode == '37') {
         lef();
-     }
-     else if (e.keyCode == '39') {
+    }
+    if (e.keyCode == '39') {
         righ();
-     }
-     else if (e.keyCode == '27') {
+    }
+    if (e.keyCode == '27') {
         closelight();
-     }
+    }
+    if (e.keyCode == '13') {
+        if (e.target == document.getElementById("rightarrow")) {
+            righ();
+        }
+        if (e.target == document.getElementById("leftarrow")) {
+            lef();
+        }
+        if (e.target == document.getElementById("x")) {
+            closelight();
+        }
+    }
 };
+
+
 
 //Opens the lightbox
 function currentSlide(n) {
     showSlides(slideIndex = n);
-        //lightbox arrows
-        document.addEventListener('keydown', check);
+    //lightbox arrows
+    document.addEventListener('keydown', check);
 }
 
 //changes which slide (image) appears
