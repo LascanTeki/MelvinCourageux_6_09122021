@@ -27,32 +27,32 @@
   <div id="contact_modal">
     <div class="modal" tabindex="0">
       <header>
-        <h2 id="contact" tabindex="0">Contactez-moi</h2>
+        <h2 id="contact" tabindex="0" class="focus">Contactez-moi</h2>
         
       </header>
       <form>
         <div>
-          <label for="Prénom" tabindex="0">Prénom</label>
-            <input id="Prénom"/>
-          <label for="Nom" tabindex="0" >Nom</label>
-            <input id="Nom" />
+          <label for="Prénom" tabindex="0" class="focus">Prénom</label>
+            <input id="Prénom" class="focus"/>
+          <label for="Nom" tabindex="0"  class="focus">Nom</label>
+            <input id="Nom" class="focus"/>
           
-          <label for="Email" tabindex="0">Email</label>
-            <input id="Email"/>
+          <label for="Email" tabindex="0" class="focus">Email</label>
+            <input id="Email" class="focus"/>
           
-          <label for="Message" tabindex="0">Votre Message </label>
-            <textarea rows="8" class="Message" id="Message"></textarea>
+          <label for="Message" tabindex="0" class="focus">Votre Message </label>
+            <textarea rows="8" id="Message" class="focus" tabindex="0"></textarea>
          
         </div>
-        <button id="contact_button">Envoyer</button>
+        <button id="contact_button" class="focus" tabindex="0">Envoyer</button>
       </form>
-      <img tabindex="0" class="close" src="assets/icons/close.svg" alt="close contact form" />
+      <img class="focus" tabindex="0" id="close" src="assets/icons/close.svg" alt="close contact form" />
     </div>
   </div>
   <div id="lightbox" tabindex="1" aria-label="image closeup view">
-    <div class="x" tabindex="6" aria-label="close dialog">x</div>
-    <div class="leftarrow" tabindex="4" aria-label="Previous Image"> &lt; </div>
-    <div class="rightarrow" tabindex="5" aria-label="Next image"> &gt; </div>
+    <div id="x" tabindex="6" aria-label="close dialog">x</div>
+    <div id="leftarrow" tabindex="4" aria-label="Previous Image"> &lt; </div>
+    <div id="rightarrow" tabindex="5" aria-label="Next image"> &gt; </div>
   </div>
 
   <script src="scripts/utils/Modal.js"></script>
