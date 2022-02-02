@@ -162,7 +162,7 @@ async function displayMedia(media) {
     n = 0;
     var likecount = 0
     const under = document.querySelector(".photograph-pics");
-    const light = document.getElementById("lightbox");
+    const light = document.getElementById("images");
 
     media.forEach((med) => {
         const { photographerId, title, image, video, likes } = med;
@@ -227,13 +227,13 @@ async function displayMedia(media) {
             //image
             im.setAttribute("src", pic);
             im.setAttribute("alt", `${title}`);
-            im.setAttribute("tabindex", "2")
+            im.setAttribute("tabindex", "0")
 
             //title
             const titl = document.createElement('div');
             titl.setAttribute("class", "titl");
             titl.textContent = title;
-            titl.setAttribute("tabindex", "3")
+            titl.setAttribute("tabindex", "0")
 
             //modal container
             const ima = document.createElement('div');
@@ -284,9 +284,10 @@ function change(media, Two) {
     nav.textContent = store;
 
     //puts arrows and x button back after sorting
-    light.innerHTML = `<div class="x" tabindex="6" aria-label="close dialog">x</div>
-    <div class="leftarrow" tabindex="4" aria-label="Previous Image"> &lt; </div>
-    <div class="rightarrow" tabindex="5" aria-label="Next image"> &gt; </div>`;
+    light.innerHTML = `<div id = "images"></div>
+    <div id="leftarrow" tabindex="0" aria-label="Previous Image"> &lt; </div>
+    <div id="rightarrow" tabindex="0" aria-label="Next image"> &gt; </div>
+    <div id="x" tabindex="0" aria-label="close dialog">x</div>`;
 
     //empties images before replacing them
     under.innerHTML = "";
@@ -310,9 +311,9 @@ function change(media, Two) {
     displayMedia(media);
 
     //consts for lightbox
-    const right = document.querySelector('.rightarrow');
-    const left = document.querySelector('.leftarrow');
-    const lightbox = document.querySelector('.x');
+    const right = document.querySelector('#rightarrow');
+    const left = document.querySelector('#leftarrow');
+    const lightbox = document.querySelector('#x');
 
     //events for lightbox (scrolling and closing)
     lightbox.addEventListener("click", closelight);
