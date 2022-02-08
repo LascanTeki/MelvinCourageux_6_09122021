@@ -1,4 +1,4 @@
-var x = 0;
+let x = 0;
 
 //displays message modal
 function displayModal() {
@@ -15,8 +15,8 @@ function displayModal() {
     document.addEventListener('keydown', check2);
 }
 
-var trap = function (e) {
-    var focusableEls = document.querySelectorAll('.focus');
+let trap = function (e) {
+    let focusableEls = document.querySelectorAll('.focus');
     console.log(focusableEls);
 
     if (e.keyCode == 9) {
@@ -55,7 +55,7 @@ function closeModal() {
 }
 
 //puts infos of the message modal in the console 
-var submit = function (e) {
+let submit = function (e) {
     e.preventDefault();
     console.log(document.getElementById("Prénom").value)
     console.log(document.getElementById("Nom").value)
@@ -64,19 +64,19 @@ var submit = function (e) {
 }
 
 //modal closing with keyboard
-var check2 = function (e) {
+let check2 = function (e) {
     if (e.keyCode == '27') {
         closeModal();
     }
 };
-var check3 = function (e) {
+let check3 = function (e) {
     if (e.keyCode == '13') {
         closeModal();
     }
 };
 
 //Check which key is pressed when the lightbox is displayed
-var check = function (e) {
+let check = function (e) {
     if (e.keyCode == '37') {
         lef();
     }
@@ -84,7 +84,8 @@ var check = function (e) {
         righ();
     }
     if (e.keyCode == '27') {
-        closelight();
+        close
+        ();
     }
     if (e.keyCode == '13') {
         if (e.target == document.getElementById("rightarrow")) {
@@ -113,8 +114,8 @@ function showSlides(n) {
     document.getElementById("lightbox").style.display = "flex";
     document.getElementById("main").style.display = "none";
     document.getElementById('header').style.display = "none";
-    var i;
-    var slides = document.getElementsByClassName("mySlides");
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
     if (n > slides.length) { slideIndex = 1 }
     if (n < 1) { slideIndex = slides.length }
     for (i = 0; i < slides.length; i++) {

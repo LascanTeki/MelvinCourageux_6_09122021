@@ -2,14 +2,15 @@ const queryString = window.location.search;
 
 const urlParams = new URLSearchParams(queryString);
 
-const path = urlParams.get('id')
+let path = urlParams.get('id')
+path = parseInt(path);
 
 //Sort button
 async function getPick() {
 
-    var One = "Popularité";
-    var Two = "Date";
-    var Three = "Titre";
+    let One = "Popularité";
+    let Two = "Date";
+    let Three = "Titre";
     const box = document.getElementById("box");
 
     const first = document.createElement('a');
@@ -59,7 +60,7 @@ async function getMedia() {
     const media = names.media;
 
     media.sort(function (a, b) {
-        var dateA = new Date(a.likes), dateB = new Date(b.likes)
+        let dateA = new Date(a.likes), dateB = new Date(b.likes)
         return dateB - dateA
     });
 
@@ -69,16 +70,28 @@ async function getMedia() {
     })
 }
 
+ class Filter {
+    static filterphoto(path, photographers) {
+        return photographers.filter(d => d.id === path);
+
+    }
+    static filtermedia(path, media){
+        return media.filter(d => d.photographerId === path);
+    }
+}
+
 //Display the profile
 
-async function displayData(photographers, likecount) {
+function displayData(photographers, likecount) {
     const photographersSection = document.querySelector(".photograph-header");
     const prix = document.querySelector(".like");
     const modal = document.getElementById("contact");
-
-    photographers.forEach((photographer) => {
-        const { name, portrait, id, tagline, city, country, price } = photographer;
-        if (id == path) {
+        console.log(path);
+        photographers = Filter.filterphoto(path, photographers);
+        console.log(photographers);
+   
+        photographers.forEach((photographer) => {
+        const { name, portrait, tagline, city, country, price } = photographer;
 
             //photographer icon
             const picture = `assets/photographers/${portrait}`;
@@ -144,29 +157,27 @@ async function displayData(photographers, likecount) {
 
             //contact title
             const ti = document.createElement('spawn');
-            ti.textContent =` ${name}`;
+            ti.textContent = ` ${name}`;
 
             //put everything in right place
             photographersSection.appendChild(titre);
             photographersSection.appendChild(button);
             photographersSection.appendChild(img);
             modal.appendChild(ti);
-        }
-    });
-};
+    }
+    );};
 
 // display images
 
-async function displayMedia(media) {
+function displayMedia(media) {
 
     n = 0;
-    var likecount = 0
+    let likecount = 0
     const under = document.querySelector(".photograph-pics");
     const light = document.getElementById("images");
-
+    media = Filter.filtermedia(path, media);
     media.forEach((med) => {
-        const { photographerId, title, image, video, likes } = med;
-        if (photographerId == path) {
+        const { title, image, video, likes } = med;
 
             //n = number of the image
             n++;
@@ -245,7 +256,6 @@ async function displayMedia(media) {
             //put it in the modal
             light.appendChild(ima);
 
-        }
     });
 
     return likecount;
@@ -254,8 +264,8 @@ async function displayMedia(media) {
 //deploy sort button
 
 function editNav() {
-    var x = document.getElementById("box");
-    var arrow = document.getElementById("arrow");
+    let x = document.getElementById("box");
+    let arrow = document.getElementById("arrow");
     if (x.className == "") {
         x.className += " responsive";
         x.setAttribute("aria-haspopup", "listbox");
@@ -269,7 +279,35 @@ function editNav() {
     }
 }
 
+//Event like
+function iflike() {
+    const liking = document.getElementsByClassName('heart');
+
+    for (let i = 0; i < liking.length; i++) {
+        liking[i].addEventListener("click", function (e) {
+            let target = e.target
+            let total = document.getElementsByClassName('likes')[0].textContent;
+            text = target.textContent.match(/\d+/)[0];
+            if (e.target.id != "check") {
+                text++;
+                total++;
+                e.target.id = "check";
+            }
+            else {
+                text--;
+                total--;
+                e.target.id = "";
+
+            }
+            document.getElementsByClassName('likes')[0].textContent = total;
+            e.target.textContent = `${text} ♥`;
+
+        });
+    }
+}
+
 //change images and order of list when clicking on filter
+
 
 function change(media, Two) {
 
@@ -279,7 +317,7 @@ function change(media, Two) {
     const light = document.getElementById("lightbox");
 
     //stores name of one of the sorting button being swapped, swap them
-    var store = Two.textContent;
+    let store = Two.textContent;
     Two.textContent = nav.textContent;
     nav.textContent = store;
 
@@ -295,11 +333,11 @@ function change(media, Two) {
     //sorting
     media.sort(function (a, b) {
         if (nav.textContent == "Popularité") {
-            var dateA = new Date(a.likes), dateB = new Date(b.likes)
+            let dateA = new Date(a.likes), dateB = new Date(b.likes)
             return dateB - dateA
         }
         if (nav.textContent == "Date") {
-            var dateA = new Date(a.date), dateB = new Date(b.date)
+            let dateA = new Date(a.date), dateB = new Date(b.date)
             return dateB - dateA
         }
         if (nav.textContent == "Titre") {
@@ -319,6 +357,7 @@ function change(media, Two) {
     lightbox.addEventListener("click", closelight);
     right.addEventListener("click", righ);
     left.addEventListener("click", lef);
+    iflike()
 
 }
 
@@ -328,11 +367,11 @@ async function init() {
     const { photographers } = await getPhotographers();
     const { media } = await getMedia();
     getPick()
-    var like = await displayMedia(media);
+    let like = await displayMedia(media);
     displayData(photographers, like);
 
     //switch for keyboard sorting
-    var n = 0;
+    let n = 0;
 
     //consts for sorting
     const nav = document.getElementById('one');
@@ -344,12 +383,12 @@ async function init() {
     const right = document.getElementById('rightarrow');
     const left = document.getElementById('leftarrow');
     //like consts
-    const liking = document.getElementsByClassName('heart');
+
     //modal submit button
     const conta = document.getElementById('contact_button');
 
     //keyboard events for sorting
-    var Nav = function (e) {
+    let Nav = function (e) {
         if (e.keyCode == '13') {
             editNav();
         }
@@ -357,11 +396,11 @@ async function init() {
             e.preventDefault();
             if (n == 0) {
                 change(media, Two);
-                n=1;
+                n = 1;
             }
             else {
                 change(media, Three);
-                n=0;
+                n = 0;
             }
         }
     }
@@ -386,29 +425,7 @@ async function init() {
         change(media, Three);
     }
 
-
-    //Event like
-    for (var i = 0; i < liking.length; i++) {
-        liking[i].addEventListener("click", function (e) {
-            var target = e.target
-            var total = document.getElementsByClassName('likes')[0].textContent;
-            text = target.textContent.match(/\d+/)[0];
-            if (e.target.id != "check") {
-                text++;
-                total++;
-                e.target.id = "check";
-            }
-            else {
-                text--;
-                total--;
-                e.target.id = "";
-
-            }
-            document.getElementsByClassName('likes')[0].textContent = total;
-            e.target.textContent = `${text} ♥`;
-
-        });
-    }
+    iflike()
 
     //modal events
     const clos = document.getElementById("close");
