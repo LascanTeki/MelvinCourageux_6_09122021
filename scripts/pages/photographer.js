@@ -70,12 +70,12 @@ async function getMedia() {
     })
 }
 
- class Filter {
+class Filter {
     static filterphoto(path, photographers) {
         return photographers.filter(d => d.id === path);
 
     }
-    static filtermedia(path, media){
+    static filtermedia(path, media) {
         return media.filter(d => d.photographerId === path);
     }
 }
@@ -86,86 +86,38 @@ function displayData(photographers, likecount) {
     const photographersSection = document.querySelector(".photograph-header");
     const prix = document.querySelector(".like");
     const modal = document.getElementById("contact");
-        console.log(path);
-        photographers = Filter.filterphoto(path, photographers);
-        console.log(photographers);
-   
-        photographers.forEach((photographer) => {
+    console.log(path);
+    photographers = Filter.filterphoto(path, photographers);
+    console.log(photographers);
+
+    photographers.forEach((photographer) => {
         const { name, portrait, tagline, city, country, price } = photographer;
 
-            //photographer icon
-            const picture = `assets/photographers/${portrait}`;
-            const img = document.createElement('img');
-            img.setAttribute("src", picture);
-            img.setAttribute("alt", name);
-            img.setAttribute("tabindex", "0")
+        //photographer icon + button
 
+        const img = Card.img(name, portrait);
 
-            //"contactez moi" bouton
-            const button = document.createElement('button');
-            button.setAttribute("class", 'conta_button');
-            button.textContent = "Contactez-moi";
+        //div contenant nom + city + quote
 
-            //nom
-            const photoname = document.createElement('h2');
-            photoname.textContent = name;
-            photoname.setAttribute("tabindex", "0")
+        const titre = Card.title(tagline, city, country, name);
 
-            //city
-            const lieu = document.createElement('div');
-            lieu.setAttribute("class", "lieu")
-            lieu.textContent = `${city}, ${country}`;
+        //like count
+        const like = Corner.Like(likecount);
 
-            //quote
-            const tag = document.createElement('div');
-            tag.setAttribute("class", "tag")
-            tag.textContent = tagline;
+        //price in corner
+        const pri = Corner.Prix(price);
 
-            //div city + quote
+        //contact title
+        const ti = document.createElement('spawn');
+        ti.textContent = ` ${name}`;
 
-            const tab = document.createElement('div');
-            tab.appendChild(lieu);
-            tab.appendChild(tag);
-            tab.setAttribute("tabindex", "0")
-
-            //div contenant nom + city + quote
-            const titre = document.createElement('div');
-            titre.setAttribute("class", 'Photo_title');
-            titre.appendChild(photoname);
-            titre.appendChild(tab);
-
-            //like count
-            const li = document.createElement('span');
-            li.setAttribute("class", 'likes');
-            li.textContent = likecount;
-            prix.appendChild(li);
-
-
-            //heart
-            const he = document.createElement('span');
-            he.setAttribute("class", "heart")
-            he.textContent = "♥";
-            he.setAttribute("aria-label", `likes`)
-            prix.appendChild(he);
-
-
-            //price in corner
-            const pri = document.createElement('span');
-            pri.textContent = `${price}€/jour`;
-            pri.setAttribute("aria-label", `${price}€ par jour`)
-            prix.appendChild(pri);
-
-            //contact title
-            const ti = document.createElement('spawn');
-            ti.textContent = ` ${name}`;
-
-            //put everything in right place
-            photographersSection.appendChild(titre);
-            photographersSection.appendChild(button);
-            photographersSection.appendChild(img);
-            modal.appendChild(ti);
+        //put everything in right place
+        photographersSection.innerHTML= titre + img;
+        prix.innerHTML= like + pri;
+        modal.appendChild(ti);
     }
-    );};
+    );
+};
 
 // display images
 
@@ -179,82 +131,38 @@ function displayMedia(media) {
     media.forEach((med) => {
         const { title, image, video, likes } = med;
 
-            //n = number of the image
-            n++;
+        //n = number of the image
+        n++;
 
-            //counts the total number of likes
-            likecount = likecount + likes;
+        //counts the total number of likes
+        likecount = likecount + likes;
 
-            //set up image or video
+        //set up image or video
 
-            if (med.hasOwnProperty('image')) {
-                pic = `assets/Sample Photos/${image}`;
-                imag = document.createElement('img');
-                im = document.createElement('img');
-                imag.setAttribute("alt", `${title}, closeup view`);
-            }
-            else {
-                pic = `assets/Sample Photos/${video}`;
-                imag = document.createElement('video');
-                imag.setAttribute("aria-label", `${title}, closeup view`);
-                im = document.createElement('video');
-                im.setAttribute("controls", "controls");
-            }
+        if (med.hasOwnProperty('image')) {
+            imag = Images.image(Images.media(title, n), image)
+            im = Images.image(Images.lightbox(title), image)
+        }
+        else {
+            imag = Images.video(Images.media(title, n), video, null)
+            im = Images.video(Images.lightbox(title), video, "controls")
+        }
 
-            imag.setAttribute("tabindex", "0")
-            imag.setAttribute("src", pic);
-            imag.setAttribute("onclick", `currentSlide(${n})`);
-            imag.setAttribute("onkeypress", `currentSlide(${n})`);
+        //title + heart container
+        const tit = Media.Titre(title, likes);
 
-            //likes
-            const heart = document.createElement('span');
-            heart.setAttribute("class", "heart");
-            heart.textContent = `${likes} ♥`;
-            heart.setAttribute("aria-label", `${likes} likes`)
-            heart.setAttribute("tabindex", "0")
+        //container
+        const cont = Media.container(tit,imag);
 
-            //title
-            const ti = document.createElement('div');
-            ti.setAttribute("tabindex", "0")
-            ti.textContent = title;
+        //put it in the page
+        under.innerHTML += cont;
 
-            //title + heart container
-            const tit = document.createElement('div');
-            tit.setAttribute("class", "title");
-            tit.appendChild(ti);
-            tit.appendChild(heart);
+        //MODAL
 
-            //container
-            const cont = document.createElement('div');
-            cont.setAttribute("class", "cont");
-            cont.appendChild(imag);
-            cont.appendChild(tit);
+        ima = Light.cont(Light.title(title), im)
 
-            //put it in the page
-            under.appendChild(cont);
-
-            //MODAL
-
-            //image
-            im.setAttribute("src", pic);
-            im.setAttribute("alt", `${title}`);
-            im.setAttribute("tabindex", "0")
-
-            //title
-            const titl = document.createElement('div');
-            titl.setAttribute("class", "titl");
-            titl.textContent = title;
-            titl.setAttribute("tabindex", "0")
-
-            //modal container
-            const ima = document.createElement('div');
-            ima.setAttribute("class", `mySlides`);
-            ima.setAttribute("aria-label", "image closeup view")
-            ima.appendChild(im);
-            ima.appendChild(titl);
-
-            //put it in the modal
-            light.appendChild(ima);
+        //put it in the modal
+        light.innerHTML+= ima;
 
     });
 
