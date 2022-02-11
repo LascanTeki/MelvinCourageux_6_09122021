@@ -49,7 +49,7 @@ function closeModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "none";
     document.getElementById("main").style.display = "block";
-    document.getElementById('header').style.display = "block";
+    document.getElementById('header').style.display = "flex";
     document.removeEventListener('keydown', check2);
     document.removeEventListener('keydown', trap);
 }
@@ -129,7 +129,7 @@ function showSlides(n) {
 function closelight() {
     document.getElementById("lightbox").style.display = "none";
     document.getElementById("main").style.display = "block";
-    document.getElementById('header').style.display = "block";
+    document.getElementById('header').style.display = "flex";
     //remove lightbox arrows
     document.removeEventListener('keydown', check);
 }
