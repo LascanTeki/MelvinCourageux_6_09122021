@@ -31,15 +31,15 @@ class UserCard {
         return `<div tabindex="0">
                     <div class="lieu"> ${city}, ${country}</div>
                     <div class="tag"> ${tagline}</div>
-                    <div class="prix">${price}€/jour</div>
+                    <div class="prix" aria-label="${price}€ par jour">${price}€/jour</div>
                 </div>`
     }
 
     //infos
     static image(picture, name, id) {
-        return `<a href="photographer.html?id=${id}">
+        return `<a href="photographer.html?id=${id}" >
                     <img src="${picture}" alt="${name}">
-                    <h2>${name}</h2>
+                    <h2 aria-hidden="true">${name}</h2>
                 </a>`
     }
 }
