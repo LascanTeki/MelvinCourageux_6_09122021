@@ -84,8 +84,7 @@ let check = function (e) {
         righ();
     }
     if (e.keyCode == '27') {
-        close
-        ();
+        closelight();
     }
     if (e.keyCode == '13') {
         if (e.target == document.getElementById("rightarrow")) {
